@@ -1,0 +1,36 @@
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.nav
+*.snm
+*.log
+*.vrb
+*.dvi
+
+# Output files
+*.ps
+
+# Temporary files
+*.tmp
+*.bak
+*.sav
+*.swp
+*.swo
+
+# Build directories
+_build/
+out/
