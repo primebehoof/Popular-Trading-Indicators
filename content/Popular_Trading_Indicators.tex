@@ -1,0 +1,275 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            Document Information                              %
+% ---------------------------------------------------------------------------- %
+% Document Title: Math Behind Popular Trading Indicators                       %
+% Date Created: 2025/01/06                                                     %
+% Version: 1.0.0                                                               %
+% ---------------------------------------------------------------------------- %
+% Purpose: Highlighting the critical role of mathematics in trading.           %
+% ---------------------------------------------------------------------------- %
+% Last Updated: 2025/01/06                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TODO List:
+% - Update Abstract
+% - Indicators needed to add:
+%   - Trend Indicators (SMA, EMA, MACD, ADX)
+%   - Momentum Indicators (RSI, Stochastic Oscillator, CCI, ROC)
+%   - Volatility Indicators (Bollinger Bands, ATR)
+%   - Volume Indicators (OBV, MFI, VWAP)
+%   - Additional Indicators (Ichimoku Cloud)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Preamble Setup for Document                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- General Document Settings ------------------------------------------------
+\documentclass[12pt]{article}
+
+% --- Page Layout and Geometry -------------------------------------------------
+\usepackage[letterpaper, margin=1in]{geometry}
+
+% --- Font and Microtype Settings ----------------------------------------------
+\usepackage{microtype}
+
+% --- Mathematical Symbols and Fonts -------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{mathtools}
+
+% --- Tables and Arrays --------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{tabularray}
+
+% --- Graphics and Color -------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+
+% --- Section and Formatting Control -------------------------------------------
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{ragged2e}
+\usepackage{lipsum}
+\usepackage{epigraph}
+\usepackage{titletoc}
+
+% --- Text Formatting ----------------------------------------------------------
+\usepackage[normalem]{ulem}
+\usepackage{mdframed}
+\usepackage{hyphenat}
+
+% --- Lists and Enumerations ---------------------------------------------------
+\usepackage{enumitem}
+
+% --- Hyperlinks and URLs ------------------------------------------------------
+\usepackage{url}
+\usepackage{hyperref}
+
+% --- Miscellaneous ------------------------------------------------------------
+\usepackage{circledsteps}
+\usepackage{fancyhdr}
+
+% \usepackage{tikz}
+% \usetikzlibrary{patterns}
+% \usetikzlibrary{backgrounds}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Custom Commands and Environments                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Theorem Environments Formatting ------------------------------------------
+\theoremstyle{plain}
+\newtheorem*{definition}{Definition}
+
+% --- Table of Contents Depth --------------------------------------------------
+\setcounter{tocdepth}{2}
+
+% --- Page Layout and Geometry -------------------------------------------------
+\geometry{
+  top=2.2cm,
+  headheight=0mm,
+  headsep=0mm,
+}
+\pagestyle{fancy}
+\fancyhf{}
+
+% --- Header and Footer Rules --------------------------------------------------
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{44pt}
+\fancyfoot[C]{\thepage}
+
+% --- Section Formatting -------------------------------------------------------
+\titleformat{\section}
+{\Huge\bfseries}
+{}
+{0pt}
+{}
+
+% --- Spacing Definitions ------------------------------------------------------
+\pgfplotsset{compat=newest}
+
+% --- Title Page Decoration ----------------------------------------------------
+\renewcommand\epigraphflush{flushright}
+\renewcommand\epigraphsize{\normalsize}
+\setlength\epigraphwidth{0.7\textwidth}
+
+\definecolor{titlepagecolor}{cmyk}{0,0,0,1}
+
+\DeclareFixedFont{\titlefont}{T1}{ppl}{b}{it}{0.5in}
+
+\makeatletter                       
+\def\printauthor{%                  
+    {\large \@author}}              
+\makeatother
+
+\newcommand\titlepagedecoration{%
+\begin{tikzpicture}[remember picture,overlay,shorten >= -10pt]
+
+\coordinate (aux1) at ([yshift=-15pt]current page.north east);
+\coordinate (aux2) at ([yshift=-410pt]current page.north east);
+\coordinate (aux3) at ([xshift=-4.5cm]current page.north east);
+\coordinate (aux4) at ([yshift=-150pt]current page.north east);
+
+\begin{scope}[titlepagecolor!60,line width=14pt,rounded corners=16pt] % Changed color and line width
+\draw
+  (aux1) -- coordinate (a)
+  ++(225:5) -- 
+  ++(-45:5.1) coordinate (b);
+\draw[shorten <= -10pt]
+  (aux3) --
+  (a) --
+  (aux1);
+\draw[opacity=0.7,titlepagecolor,shorten <= -10pt] % Increased opacity
+  (b) -- 
+  ++(225:2.4) -- 
+  ++(-45:2.4);
+\end{scope}
+\draw[titlepagecolor,line width=10pt,rounded corners=10pt,shorten <= -10pt] % Increased line width
+  (aux4) --
+  ++(225:0.9) --
+  ++(-45:0.9);
+\begin{scope}[titlepagecolor!80,line width=8pt,rounded corners=10pt] % Changed color and line width
+\draw[shorten <= -10pt]
+  (aux2) --
+  ++(225:3.2) coordinate[pos=0.45] (c) --
+  ++(-45:3.2);
+\draw
+  (aux2) --
+  (c) --
+  ++(135:2.6) -- 
+  ++(45:2.6) -- 
+  ++(-45:2.6) coordinate[pos=0.3] (d);   
+\draw 
+  (d) -- +(45:1.2);
+\end{scope}
+\end{tikzpicture}%
+}
+
+% --- Table of Contents Formatting --------------------------------------------
+\titlecontents{section}[2.3em]
+  {}
+  {\bfseries\contentslabel[\thecontentslabel.0]{2em}\MakeUppercase}
+  {\hspace*{-2.3em}\bfseries\MakeUppercase}
+  {\titlerule*[1pc]{.}\contentspage}
+\titlecontents{subsection}[4.6em]
+  {}
+  {\bfseries\contentslabel{2em}}
+  {\hspace*{-2.3em}\bfseries}
+  {\titlerule*[1pc]{.}\contentspage}
+\titlecontents{subsubsection}[6.9em]
+  {}
+  {\bfseries\contentslabel{2em}\itshape\space}
+  {\hspace*{-2.3em}\bfseries}
+  {\titlerule*[1pc]{.}\contentspage}
+
+\makeatletter
+\renewcommand\tableofcontents{%
+  \section*{\centerline{\MakeUppercase{\contentsname}}
+    \@mkboth
+      {\MakeUppercase\contentsname}
+      {\MakeUppercase\contentsname}
+  }%
+  \@starttoc{toc}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            End of Preamble Setup                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Title Page                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+
+\noindent
+\titlefont Math Behind Popular \\ Trading Indicators\par
+
+\vspace{0.7cm}
+
+\begin{quote}
+    \textit{All the math you need in the stock market you get in the fourth grade.}
+\end{quote}
+
+\begin{center}
+  \textsc{\hspace{-1.4cm}-- Peter Lynch --}
+\end{center}
+
+\vspace{2.5cm}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/chart.jpg}
+\end{figure}
+
+\vfill
+
+\begin{center}
+    \textsc{\large PRIME BEHOOF}
+\end{center}
+
+\titlepagedecoration
+\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                End Title Page                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           Begin Table of Contents                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            End Table of Contents                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               Begin Abstract                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  Need to update.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                End Abstract                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
