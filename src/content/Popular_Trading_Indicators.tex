@@ -3,11 +3,11 @@
 % ---------------------------------------------------------------------------- %
 % Document Title: Math Behind Popular Trading Indicators                       %
 % Date Created: 2025/01/06                                                     %
-% Version: 1.0.0                                                               %
+% Version: 1.1.0                                                               %
 % ---------------------------------------------------------------------------- %
 % Purpose: Highlighting the critical role of mathematics in trading.           %
 % ---------------------------------------------------------------------------- %
-% Last Updated: 2025/01/06                                                     %
+% Last Updated: 2025/01/07                                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % TODO List:
@@ -270,6 +270,60 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                End Abstract                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Begin Section: Disclaimers                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{DISCLAIMERS}
+
+In the discussion below, I will adopt the following conventions:  
+
+\begin{itemize}
+  \item Price data points may correspond to one of the following values:  
+    \begin{itemize}
+      \item $O$: Open  
+      \item $H$: High  
+      \item $L$: Low  
+      \item $C$: Close  
+    \end{itemize}
+  \item Unless explicitly specified, $P$ will serve as a placeholder for any of these price data points.
+  \item Let $P$ represent a price value. The observed price at time $t$ is denoted as $P_t$, the price of the previous candle as $P_{t-1}$, and the price of the next candle as $P_{t+1}$.
+  \item If not explicity specified, standard lookback period will have length of $n$.
+\end{itemize}
+
+\begin{center}
+  \begin{tikzpicture}[scale=1]
+    % ------------------------------------------------------------------------ %
+    % Plot-Name: Indexing Line Explanation Plot                                %
+    % ------------------------------------------------------------------------ %
+
+    % Horizontal line
+    \draw[thick, ->] (0,0) -- (13,0);
+
+    % Ticks on line
+    \foreach \x in {1.5, 3.5, 8, 10, 12} {
+        \draw[thick] (\x,0.08) -- (\x,-0.08);
+    }
+
+    % Ticks labels
+    \node[above] at (1.5,0) {$P_{t-n}$};
+    \node[above] at (3.5,0) {$P_{t-n + 1}$};
+    \node[above] at (5.75,0) {\ldots};
+    \node[above] at (8,0) {$P_{t-2}$};
+    \node[above] at (10,0) {$P_{t-1}$};
+    \node[above] at (12,0) {$P_t$};
+
+  \end{tikzpicture}
+\end{center}
+
+Now that we have clarified the conventions of notation and indexing system, let us proceed with the discussion of indicators.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           End Section: Disclaimers                           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
