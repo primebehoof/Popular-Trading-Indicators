@@ -3,11 +3,11 @@
 % ---------------------------------------------------------------------------- %
 % Document Title: Math Behind Popular Trading Indicators                       %
 % Date Created: 2025/01/06                                                     %
-% Version: 1.1.0                                                               %
+% Version: 1.2.0                                                               %
 % ---------------------------------------------------------------------------- %
 % Purpose: Highlighting the critical role of mathematics in trading.           %
 % ---------------------------------------------------------------------------- %
-% Last Updated: 2025/01/07                                                     %
+% Last Updated: 2025/01/09                                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % TODO List:
@@ -324,6 +324,65 @@ Now that we have clarified the conventions of notation and indexing system, let 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                           End Section: Disclaimers                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Begin Section: Trend Indicators                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{TREND INDICATORS}
+
+\begin{definition} \textbf{Simple Moving Average - SMA} \\
+Tool in financial analysis that computes the arithmetic mean of a security's price over a predetermined number of periods. By averaging past prices, the SMA smooths out price fluctuations, aiding in the identification of prevailing market trends.
+\end{definition}
+
+\vspace{-15pt}
+
+$$ S\!M\!A_t(n) \, = \, \sum_{k = 0}^{n-1} \, P_{t - k} $$
+
+\begin{definition} \textbf{Exponential Moving Average - EMA} \\
+Weighted moving average that places greater importance on recent price data. The EMA is calculated by applying a smoothing factor to the previous period's EMA and the current period's price.
+\end{definition}
+
+\vspace{-10pt}
+
+$$ 
+E\!M\!A_t(n) \, = \, \alpha \cdot P_t \, + \, (1 - \alpha) \cdot E\!M\!A_{t-1}(n)
+$$
+
+\textit{It offers a more responsive average, reflecting current market trends more accurately.}
+
+\vspace{-15pt}
+
+$$
+E\!M\!A_t \, = \, P_t \cdot ( \scalebox{1}{$\frac{\lambda}{n + 1}$}) \, + \, E\!M\!A_{t - 1} \cdot (\scalebox{1}{$1 - \frac{\lambda}{n + 1}$}), \quad \text{s.t.} \,\,\, \lambda \in (0, \, {n + 1}) 
+$$
+
+For \textit{smoothing factor}$ \,\, \scalebox{0.9}{$\alpha \coloneq \frac{\lambda}{1 + n}$} $, which stays \underline{constant} during calculation, the most common representation of $E\!M\!A$ with look back period $n$ at time $t$ is:
+$$ E\!M\!A_t(n) \, = \, P_t \cdot \alpha \, + \, E\!M\!A_{t - 1}(n-1) \cdot (1 - \alpha ), \quad \text{s.t.} \,\,\, \alpha \in (0, \, 1) $$
+Alternative non-recursive methodology, utilizing a functional series:
+$$ E\!M\!A_t(n) = \alpha \cdot P_t + \sum_{k=1}^{n} (1 - \alpha)^k \cdot \alpha \cdot P_{t-k} $$
+\textbf{Common settings:}
+\begin{itemize}
+    \item \textit{Look back period}: Longer term; $ n \in \{ 50, 200 \} $, \, Shorter term; $ n \in \{8, 20\}$
+    \item \textit{Smoothing constant}: $\lambda = 2 $ (Determines the weighting of recent data points)
+    \item \textit{Price data point}: $P_t = C_t$ (Closing price serves as standard, because it reflects the final consensus of value for that period after all trading has been completed.)
+    \end{itemize}
+\textbf{Strengths:}
+\begin{itemize}
+    \item \textit{Trend Identification}: If the price is above the EMA, it suggests an upward trend, indicating bullish market conditions. Conversely, if the price is below the EMA, it suggests a downward trend, indicating bearish conditions.
+    \item \textit{Smoothens Price Data}:  Reduces market "noise" by smoothing out short-term fluctuations, offering a clearer view of the price trend.
+    \end{itemize}
+\textbf{Weaknesses:}
+\begin{itemize}
+    \item \textit{Emphasizing Recent Price Action}: Overweighting recent dates creates a bias that leads to more false alarms. 
+    \item \textit{Lagging Indicator}:  Since they are based on past prices, they can lag behind the current market, potentially leading to delayed signals.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          End Section: Trend Indicators                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
